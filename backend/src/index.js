@@ -6,7 +6,8 @@ const cookieParser = require("cookie-parser");
 const { connectDB } = require("./lib/db");
 require("dotenv").config();
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: "2mb" }));
+app.use(express.urlencoded({ limit: "2mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
@@ -15,7 +16,7 @@ app.use(
   })
 );
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 const PORT = process.env.PORT;
 

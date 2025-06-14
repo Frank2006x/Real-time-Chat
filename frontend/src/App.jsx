@@ -16,8 +16,10 @@ import SignUpPage from "./pages/SignUpPage";
 import AppLayout from "./layouts/app-layout";
 import { useAuthStore } from "./store/useAuthStore";
 import { Toaster } from "react-hot-toast";
+import { useThemeStore } from "./store/useThemeStore";
 function App() {
   const authUser = useAuthStore((state) => state.authUser);
+  const { theme } = useThemeStore();
   const router = createBrowserRouter([
     {
       element: <AppLayout />,
@@ -47,12 +49,12 @@ function App() {
   ]);
 
   return (
-    <>
+    <div data-theme={theme}>
       <div>
         <Toaster />
       </div>
       <RouterProvider router={router} />
-    </>
+    </div>
   );
 }
 
