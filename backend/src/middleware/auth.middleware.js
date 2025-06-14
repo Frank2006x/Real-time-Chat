@@ -22,6 +22,6 @@ module.exports = async function protectedRoute(req, res, next) {
     req.user = user;
     next();
   } catch (err) {
-    console.log("Error in protectedRoute middleware ", console.error.message);
+    console.log("Error in protectedRoute middleware ", err.message);
   }
 };

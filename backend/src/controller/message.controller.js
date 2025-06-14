@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 const Message = require("../models/message.model");
 const cloudinary = require("../lib/cloudinary");
 
-const getUsersFroSideBar = async (req, res) => {
+const getUsersFromSideBar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
     const filteredUser = await User.find({
@@ -27,17 +27,17 @@ const getMessages = async (req, res) => {
         { senderId: userToChatId, receiverId: myId },
       ],
     });
-    res.status(200).json(message);
+    res.status(200).json(messages);
   } catch (error) {
     console.log("Error in getMessages controller", error.message);
-    res.status(500).jsos({ message: "internal server error" });
+    res.status(500).json({ message: "internal server error" });
   }
 };
 
 const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
-    const { id: receriverId } = req.params;
+    const { id: receiverId } = req.params;
 
     const senderId = req.user._id;
 
@@ -61,4 +61,4 @@ const sendMessage = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-module.exports = { getUsersFroSideBar };
+module.exports = { getUsersFromSideBar, getMessages, sendMessage };
