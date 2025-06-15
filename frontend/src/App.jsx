@@ -14,11 +14,13 @@ import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
 import SignUpPage from "./pages/SignUpPage";
 import AppLayout from "./layouts/app-layout";
-import { useAuthStore } from "./store/useAuthStore";
+import {  useAuthStore } from "./store/useAuthStore";
 import { Toaster } from "react-hot-toast";
 import { useThemeStore } from "./store/useThemeStore";
 function App() {
   const authUser = useAuthStore((state) => state.authUser);
+  const { onlineUsers } = useAuthStore();
+  console.log(onlineUsers);
   const { theme } = useThemeStore();
   const router = createBrowserRouter([
     {
